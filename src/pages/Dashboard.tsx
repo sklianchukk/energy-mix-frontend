@@ -65,10 +65,10 @@ const Dashboard: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#f8fafc]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:6 py-8 sm:py-12">
                 <div className="mb-10 text-center px-4">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500 mb-3 tracking-tight">
-                        uk energy mix tracker
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500 mb-3 tracking-tight pb-2">
+                        UK energy mix tracker
                     </h1>
                     <p className="text-gray-600">
                         find the optimal window to charge your electric vehicle

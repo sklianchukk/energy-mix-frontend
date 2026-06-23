@@ -42,7 +42,10 @@ function applyThreshold(
     if (existingOther) {
         return visible.map((d) =>
             d.name === "Other"
-                ? { ...d, value: Math.round((d.value + otherValue) * 100) / 100 }
+                ? {
+                      ...d,
+                      value: Math.round((d.value + otherValue) * 100) / 100,
+                  }
                 : d
         );
     }
@@ -85,19 +88,15 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
 
     return (
         <div className="bg-white rounded-xl shadow-lg p-5 flex flex-col items-center relative">
-
-            {/* header row */}
             <div className="w-full flex items-center justify-between mb-1">
                 <h3 className="text-xl font-bold text-gray-800">{title}</h3>
 
-                {/* filter button */}
                 <div className="relative">
                     <button
                         onClick={() => setFilterOpen((o) => !o)}
                         title="Filter small slices"
                         className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                     >
-                        {/* hamburger icon */}
                         <svg
                             className="w-3.5 h-3.5"
                             fill="none"
@@ -105,7 +104,10 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                             stroke="currentColor"
                             strokeWidth={2}
                         >
-                            <path strokeLinecap="round" d="M2 4h12M2 8h12M2 12h12" />
+                            <path
+                                strokeLinecap="round"
+                                d="M2 4h12M2 8h12M2 12h12"
+                            />
                         </svg>
                         Filter
                         {hiddenCount > 0 && (
@@ -115,10 +117,9 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                         )}
                     </button>
 
-                    {/* dropdown */}
                     {filterOpen && (
-                        <div className="absolute right-0 top-9 z-20 w-44 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden">
-                            <p className="px-3 py-2 text-[11px] font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                        <div className="absolute right-0 top-9 z-20 w-56 sm:w-64 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden">
+                            <p className="px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-100">
                                 Hide slices smaller than
                             </p>
                             {THRESHOLD_OPTIONS.map((opt) => (
@@ -128,7 +129,7 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                                         setThreshold(opt.value);
                                         setFilterOpen(false);
                                     }}
-                                    className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                                         threshold === opt.value
                                             ? "bg-blue-50 text-blue-700 font-semibold"
                                             : "text-gray-700 hover:bg-gray-50"
@@ -136,7 +137,9 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                                 >
                                     {opt.label}
                                     {threshold === opt.value && (
-                                        <span className="float-right text-blue-500">✓</span>
+                                        <span className="float-right text-blue-500">
+                                            ✓
+                                        </span>
                                     )}
                                 </button>
                             ))}
@@ -145,7 +148,6 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                 </div>
             </div>
 
-            {/* clean energy badge */}
             <div className="mb-3 text-center">
                 <p className="text-4xl font-bold text-green-600">
                     {cleanEnergyPercentage.toFixed(2)}%
@@ -155,7 +157,6 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                 </p>
             </div>
 
-            {/* pie chart — no inline labels, only tooltip */}
             <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                     <Pie
@@ -175,10 +176,12 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                 </PieChart>
             </ResponsiveContainer>
 
-            {/* custom legend grid */}
             <div className="w-full mt-3 grid grid-cols-2 gap-x-3 gap-y-1.5">
                 {displayData.map((entry) => (
-                    <div key={entry.name} className="flex items-center gap-1.5 min-w-0">
+                    <div
+                        key={entry.name}
+                        className="flex items-center gap-1.5 min-w-0"
+                    >
                         <span
                             className="flex-shrink-0 w-2.5 h-2.5 rounded-sm"
                             style={{ backgroundColor: entry.color }}
@@ -193,14 +196,13 @@ const EnergyMixChart: React.FC<EnergyMixChartProps> = ({
                 ))}
             </div>
 
-            {/* hint when slices are hidden */}
             {hiddenCount > 0 && (
                 <p className="mt-2 text-[11px] text-gray-400 italic">
-                    {hiddenCount} source{hiddenCount > 1 ? "s" : ""} grouped into "Other"
+                    {hiddenCount} source{hiddenCount > 1 ? "s" : ""} grouped
+                    into "Other"
                 </p>
             )}
 
-            {/* close dropdown on outside click */}
             {filterOpen && (
                 <div
                     className="fixed inset-0 z-10"
