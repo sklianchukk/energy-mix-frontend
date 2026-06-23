@@ -64,11 +64,10 @@ const Dashboard: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                {/* header */}
-                <div className="mb-8 text-center">
-                    <h1 className="text-4xl font-bold text-gray-800 mb-2">
+        <div className="min-h-screen bg-[#f8fafc]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+                <div className="mb-10 text-center px-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500 mb-3 tracking-tight">
                         uk energy mix tracker
                     </h1>
                     <p className="text-gray-600">
@@ -76,25 +75,21 @@ const Dashboard: React.FC = () => {
                     </p>
                 </div>
 
-                {/* error display */}
                 {error && (
                     <ErrorDisplay message={error} onDismiss={dismissError} />
                 )}
 
-                {/* charging window selector */}
                 <ChargingWindowSelector
                     onSelect={handleSelectWindow}
                     isLoading={isLoadingOptimalWindow}
                 />
 
-                {/* optimal window display */}
                 {optimalWindow && (
                     <OptimalWindowDisplay
                         window={optimalWindow.chargingWindow}
                     />
                 )}
 
-                {/* energy mix charts */}
                 {isLoadingEnergyData ? (
                     <LoadingSpinner message="loading energy mix data..." />
                 ) : energyData ? (
