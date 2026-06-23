@@ -1,5 +1,3 @@
-// type definitions for frontend
-
 export interface EnergyMixDay {
     date: string;
     generationmix: Record<string, number>;

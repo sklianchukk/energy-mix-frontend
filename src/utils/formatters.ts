@@ -1,5 +1,3 @@
-// utility functions for date formatting and data processing
-
 import { GenerationMixRecord } from "../types/index";
 
 const FUEL_COLORS: Record<string, string> = {

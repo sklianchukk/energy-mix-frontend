@@ -1,5 +1,3 @@
-// render tests for React components using @testing-library/react
-
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
@@ -81,7 +79,9 @@ describe("EnergyMixChart", () => {
             />
         );
         fireEvent.click(screen.getByTitle("Filter small slices"));
-        expect(screen.getByText("Hide slices smaller than")).toBeInTheDocument();
+        expect(
+            screen.getByText("Hide slices smaller than")
+        ).toBeInTheDocument();
     });
 
     it("should show legend items for all data entries above threshold", () => {
@@ -122,23 +122,35 @@ describe("EnergyMixChart", () => {
 // ------------------------------------------------------------------
 describe("ChargingWindowSelector", () => {
     it("should render the select dropdown with options 1–6", () => {
-        render(<ChargingWindowSelector onSelect={jest.fn()} isLoading={false} />);
+        render(
+            <ChargingWindowSelector onSelect={jest.fn()} isLoading={false} />
+        );
         const select = screen.getByRole("combobox");
         expect(select).toBeInTheDocument();
 
         for (let h = 1; h <= 6; h++) {
-            expect(screen.getByRole("option", { name: `${h} hour${h > 1 ? "s" : ""}` })).toBeInTheDocument();
+            expect(
+                screen.getByRole("option", {
+                    name: `${h} hour${h > 1 ? "s" : ""}`,
+                })
+            ).toBeInTheDocument();
         }
     });
 
     it("should render the submit button", () => {
-        render(<ChargingWindowSelector onSelect={jest.fn()} isLoading={false} />);
-        expect(screen.getByRole("button", { name: /find optimal window/i })).toBeInTheDocument();
+        render(
+            <ChargingWindowSelector onSelect={jest.fn()} isLoading={false} />
+        );
+        expect(
+            screen.getByRole("button", { name: /find optimal window/i })
+        ).toBeInTheDocument();
     });
 
     it("should call onSelect with the selected value on submit", () => {
         const handleSelect = jest.fn();
-        render(<ChargingWindowSelector onSelect={handleSelect} isLoading={false} />);
+        render(
+            <ChargingWindowSelector onSelect={handleSelect} isLoading={false} />
+        );
 
         // change to 4 hours
         const select = screen.getByRole("combobox");
@@ -151,7 +163,9 @@ describe("ChargingWindowSelector", () => {
     });
 
     it("should disable inputs and show loading text when isLoading is true", () => {
-        render(<ChargingWindowSelector onSelect={jest.fn()} isLoading={true} />);
+        render(
+            <ChargingWindowSelector onSelect={jest.fn()} isLoading={true} />
+        );
 
         expect(screen.getByRole("combobox")).toBeDisabled();
         expect(screen.getByRole("button")).toBeDisabled();
@@ -160,7 +174,9 @@ describe("ChargingWindowSelector", () => {
 
     it("should not call onSelect when form is submitted while loading", () => {
         const handleSelect = jest.fn();
-        render(<ChargingWindowSelector onSelect={handleSelect} isLoading={true} />);
+        render(
+            <ChargingWindowSelector onSelect={handleSelect} isLoading={true} />
+        );
 
         const button = screen.getByRole("button");
         fireEvent.click(button);
@@ -183,7 +199,9 @@ describe("OptimalWindowDisplay", () => {
 
     it("should render the heading", () => {
         render(<OptimalWindowDisplay window={windowData} />);
-        expect(screen.getByText(/optimal charging window/i)).toBeInTheDocument();
+        expect(
+            screen.getByText(/optimal charging window/i)
+        ).toBeInTheDocument();
     });
 
     it("should display start and end labels", () => {
@@ -217,7 +235,12 @@ describe("OptimalWindowDisplay", () => {
 // ------------------------------------------------------------------
 describe("ErrorDisplay", () => {
     it("should render the error message", () => {
-        render(<ErrorDisplay message="something went wrong" onDismiss={jest.fn()} />);
+        render(
+            <ErrorDisplay
+                message="something went wrong"
+                onDismiss={jest.fn()}
+            />
+        );
         expect(screen.getByText("something went wrong")).toBeInTheDocument();
     });
 

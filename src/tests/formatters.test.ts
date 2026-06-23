@@ -1,5 +1,3 @@
-// integration tests for frontend components
-
 import {
     generationMixToChartData,
     getDayLabel,

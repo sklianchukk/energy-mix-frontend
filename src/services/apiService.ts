@@ -1,5 +1,3 @@
-// service for communicating with the backend api
-
 import { EnergyMixData, OptimalWindowData } from "../types/index";
 
 const API_BASE_URL =

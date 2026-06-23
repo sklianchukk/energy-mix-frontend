@@ -1,5 +1,3 @@
-// integration tests for apiService — mocks the global fetch
-
 import { fetchEnergyMix, fetchOptimalWindow } from "../services/apiService";
 
 const mockFetch = jest.fn();
@@ -15,7 +13,11 @@ afterEach(() => {
 describe("fetchEnergyMix", () => {
     const fakeResponse = {
         days: [
-            { date: "2026-06-23", generationmix: { wind: 30 }, cleanEnergyPercentage: 30 },
+            {
+                date: "2026-06-23",
+                generationmix: { wind: 30 },
+                cleanEnergyPercentage: 30,
+            },
         ],
     };
 
@@ -57,7 +59,9 @@ describe("fetchEnergyMix", () => {
     it("should throw when network request fails entirely", async () => {
         mockFetch.mockRejectedValue(new Error("network error"));
 
-        await expect(fetchEnergyMix()).rejects.toThrow("failed to fetch energy mix");
+        await expect(fetchEnergyMix()).rejects.toThrow(
+            "failed to fetch energy mix"
+        );
     });
 });
 
@@ -125,7 +129,9 @@ describe("fetchOptimalWindow", () => {
 
         for (const hours of [1, 2, 3, 4, 5, 6]) {
             await fetchOptimalWindow(hours);
-            const calledUrl = mockFetch.mock.calls[mockFetch.mock.calls.length - 1][0] as string;
+            const calledUrl = mockFetch.mock.calls[
+                mockFetch.mock.calls.length - 1
+            ][0] as string;
             expect(calledUrl).toContain(`hours=${hours}`);
         }
     });
